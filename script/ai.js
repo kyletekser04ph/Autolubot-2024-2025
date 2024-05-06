@@ -1,39 +1,49 @@
 const axios = require('axios');
 
 module.exports.config = {
-  name: 'ai',
-  version: '1.0.0',
-  role: 0,
-  hasPrefix: false,
-  aliases: ['snow', 'ai'],
-  description: "An AI command powered by Snowflakes AI",
-  usage: "snowflakes [prompt]",
-  credits: 'churchill',
-  cooldown: 3,
+    name: "ai",
+    version: "1.0.0",
+    hasPermission: 0,
+    credits: "AJ",//api by jerome
+    description: "Gpt architecture",
+    usePrefix: false,
+    commandCategory: "GPT4",
+    cooldowns: 5,
 };
 
-module.exports.run = async function({ api, event, args }) {
-  const input = args.join(' ');
-  
-  if (!input) {
-    api.sendMessage(`𝑯𝑬𝑳𝑳𝑶! 𝑰'𝑴 𝑨 𝑺𝑵𝑶𝑾𝑭𝑳𝑨𝑲𝑬𝑺 𝑨𝑰 𝑩𝑶𝑻 ✨ 
+module.exports.run = async function ({ api, event, args }) {
+    try {
+        const { messageID, messageReply } = event;
+        let prompt = args.join(' ');
 
-━━━━━━━━━━━━━━━
+        if (messageReply) {
+            const repliedMessage = messageReply.body;
+            prompt = `${repliedMessage} ${prompt}`;
+        }
 
- 𝑷𝑳𝑬𝑨𝑺𝑬 𝑷𝑹𝑶𝑽𝑰𝑫𝑬 𝑨 𝑸𝑼𝑬𝑺𝑻𝑰𝑶𝑵/𝑸𝑼𝑬𝑹𝒀`, event.threadID, event.messageID);
-    return;
-  }
-  
-  api.sendMessage(`🔍Searching for Snowflakes AI response....`, event.threadID, event.messageID);
-  
-  try {
-    const { data } = await axios.get(`https://hashier-api-snowflake.vercel.app/api/snowflake?ask=${encodeURIComponent(input)}`);
-    if (data.response) {
-      api.sendMessage(data.response + "\n\n𝒄𝒓𝒆𝒅𝒊𝒕𝒔: https://www.facebook.com/Churchill.Dev4100", event.threadID, event.messageID);
-    } else {
-      api.sendMessage('No response found.', event.threadID, event.messageID);
+        if (!prompt) {
+            return api.sendMessage('ℹ Please type a question.', event.threadID, messageID);
+        }
+        api.sendMessage('🔍 Searching your question please wait...', event.threadID);
+
+        // Delay
+        await new Promise(resolve => setTimeout(resolve, 2000)); // Adjust the delay time as needed
+
+        const gpt4_api = `https://gpt4withcustommodel.onrender.com/gpt?query=${encodeURIComponent(prompt)}&model=gpt-4-32k-0314`;
+
+        const response = await axios.get(gpt4_api);
+
+        if (response.data && response.data.response) {
+            const generatedText = response.data.response;
+
+            // Ai Answer Here
+            api.sendMessage(`🎓 𝐆𝐏𝐓-4 ( 𝐀𝐈 )\n━━━━━━━━━━━━━━━━\n📝 answer: ➪ ${generatedText}\n━━━━━━━━━━━━━━━━\nThis autobot is created by: AJ Chicano\nYou can create your own bot here ➪ https://scyte.onrender.com`, event.threadID, messageID);
+        } else {
+            console.error('API response did not contain expected data:', response.data);
+            api.sendMessage(`❌ 𝙰𝙽 𝙴𝚁𝚁𝙾𝚁 𝙾𝙲𝙲𝚄𝚁𝚁𝙴𝙳 𝚆𝙷𝙸𝙻𝙴 𝙶𝙴𝙽𝙴𝚁𝙰𝚃𝙸𝙽𝙶 𝚃𝙷𝙴 𝚃𝙴𝚇𝚃 𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴. 𝙿𝙻𝙴𝙰𝚂𝙴 𝚃𝚁𝚈 𝙰𝙶𝙰𝙸𝙽 𝙻𝙰𝚃𝙴𝚁. 𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴 𝙳𝙰𝚃𝙰: ${JSON.stringify(response.data)}`, event.threadID, messageID);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        api.sendMessage(`❌  error occurred while generating the text response. Please try again later. Error details: ${error.message}`, event.threadID, event.messageID);
     }
-  } catch (error) {
-    api.sendMessage('An error occurred while processing your request.', event.threadID, event.messageID);
-  }
 };
