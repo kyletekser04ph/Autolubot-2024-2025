@@ -24,7 +24,7 @@ module.exports.run = async function({ api, event, args }) {
 
     try {
         
-        const aiResponse = await axios.get('https://markdevs-api.onrender.com/gpt4', {
+        const aiResponse = await axios.get('https://hercai.onrender.com/v3/hercai', {
             params: { prompt: query, uid: event.senderID }
         });
         const aiData = aiResponse.data.gpt4;
