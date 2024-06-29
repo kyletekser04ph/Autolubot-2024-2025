@@ -79,26 +79,26 @@ module.exports.run = async function ({
 			let page = 1;
 			let start = (page - 1) * pages;
 			let end = start + pages;
-			let helpMessage = `🔴🟢🟡\n\n====『 𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗜𝗦𝗧 』====\n▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱\n\n♡  ∩_∩\n（„• ֊ •„)♡\n╭─∪∪───────────⟡`;
+			let helpMessage = `[📓] - 𝗔𝗨𝗧𝗢𝗟𝗨𝗕𝗢𝗧𝗩𝟯 𝗖𝗠𝗗 𝗟𝗜𝗦𝗧\n\n▬▬▬▬▬▬▬▬▬▬▬▬\n\n  ∩_∩\n (๑˃̵　ᴗ　˂̵)و\n╭─∪∪───────────✪`;
 			for (let i = start; i < Math.min(end, commands.length); i++) {
-				helpMessage += `\n├ ✧『 ${i + 1} 』  ${prefix}${commands[i]}\n├──────────────⟡\t`;
+				helpMessage += `\n├ ✧『 ${i + 1} 』  ${prefix}${commands[i]}\n├──────────────✪\t`;
 			}
-			helpMessage += '\n\n====『𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧』====\n▱▱▱▱▱▱▱▱▱▱▱▱▱\n\n';
+			helpMessage += '\n\n『 𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧 』\n▬▬▬▬▬▬▬▬▬▬▬▬\n\n';
 			eventCommands.forEach((eventCommand, index) => {
-			helpMessage += `╭─────────────────╮\n |\t『 ${index + 1}.』  ${prefix}${eventCommand}\n╰─────────────────╯ \n\n`;
+			helpMessage += `╭──────༺◈༻──────╮\n |\t『 ${index + 1}.』  ${prefix}${eventCommand}\n╰──────༺◈༻──────╯ \n\n`;
 			});
-			helpMessage += `𝗣𝗮𝗴𝗲: 『${page}/${Math.ceil(commands.length / pages)}』\nTo view information about a specific command, type '${prefix}help command name.\n\n𝗥𝗔𝗡𝗗𝗢𝗠 𝗙𝗔𝗖𝗧: ${randomQuote}`;
+			helpMessage += `『📖』𝗣𝗮𝗴𝗲: 『${page}/${Math.ceil(commands.length / pages)}』\nTo view information about a specific command, type '${prefix}help command name.\n\n📌 𝗥𝗔𝗡𝗗𝗢𝗠 𝗙𝗔𝗖𝗧: ${randomQuote}`;
 			api.sendMessage(helpMessage, event.threadID, event.messageID);
 		} else if (!isNaN(input)) {
 			const page = parseInt(input);
 			const pages = 100;
 			let start = (page - 2) * pages;
 			let end = start + pages;
-			let helpMessage = `𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗜𝗦𝗧:\n\n`;
+			let helpMessage = `[📖] - 𝗔𝗨𝗧𝗢𝗟𝗨𝗕𝗢𝗧𝗩𝟯 𝗖𝗠𝗗 𝗟𝗜𝗦𝗧\n\n▬▬▬▬▬▬▬▬▬▬▬▬\n\n`;
 			for (let i = start; i < Math.min(end, commands.length); i++) {
 				helpMessage += `\t${i + 1}. 『 ${prefix}${commands[i]} 』\n`;
 			}
-			helpMessage += '\n𝗘𝗩𝗘𝗡𝗧 𝗟𝗜𝗦𝗧:\n\n';
+			helpMessage += '\n『 𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧 』\n▬▬▬▬▬▬▬▬▬▬▬▬\n\n';
 			eventCommands.forEach((eventCommand, index) => {
 				helpMessage += `\t${index + 1}. 『 ${prefix}${eventCommand} 』\n`;
 			});
