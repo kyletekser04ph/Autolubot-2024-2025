@@ -85,9 +85,9 @@ module.exports.run = async function ({
 			}
 			helpMessage += '\n\n『 𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧 』\n▬▬▬▬▬▬▬▬▬▬▬▬\n\n';
 			eventCommands.forEach((eventCommand, index) => {
-			helpMessage += `╭──────༺◈༻──────╮\n |\t『 ${index + 1}.』  ${prefix}${eventCommand}\n╰──────༺◈༻──────╯ \n\n`;
+			helpMessage += `\n |\t『 ${index + 1}.』  ${prefix}${eventCommand}\n\n\n`;
 			});
-			helpMessage += `『📖』𝗣𝗮𝗴𝗲: 『${page}/${Math.ceil(commands.length / pages)}』\nTo view information about a specific command, type '${prefix}help command name.\n\n📌 𝗥𝗔𝗡𝗗𝗢𝗠 𝗙𝗔𝗖𝗧: ${randomQuote}`;
+			helpMessage += `『📖』𝗣𝗮𝗴𝗲: 『${page}/${Math.ceil(commands.length / pages)}』\nTo view information about a specific command, type '${prefix}help command name.\n𝗧𝗵𝗶𝘀 𝗕𝗼𝘁 𝘄𝗮𝘀 𝗰𝗿𝗲𝗮𝘁𝗲𝗱 𝗯𝘆 • Kyle敦. ဗီူ\n\n𝖢𝗋𝖾𝖺𝗍𝖾 𝗒𝗈𝗎𝗋 𝗈𝗐𝗇 𝖡𝗈𝗍 𝗁𝖾𝗋𝖾: https://autolubot-psi-kyledev03.onrender.com\n\n📌 𝗥𝗔𝗡𝗗𝗢𝗠 𝗙𝗔𝗖𝗧: ${randomQuote}`;
 			api.sendMessage(helpMessage, event.threadID, event.messageID);
 		} else if (!isNaN(input)) {
 			const page = parseInt(input);
