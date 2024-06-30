@@ -184,7 +184,7 @@ body {
 
 #json-data {
     color: white;
-    background-image: url('https://i.imgur.com/P82FEjQ.jpeg');
+    background-image: url('https://i.imgur.com/RXJJBdb.gif');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -240,8 +240,8 @@ video {
 	border-radius: 8px;
 	cursor: pointer;
 	transition: background-color 0.3s ease, border-color 0.3s ease; 
-	border-color: #ccc;
-	background-color: #fff;
+	border-color: rgba(0, 0, 0, 0);
+	background-color: #333;
 }
 #listOfCommands, #listOfCommandsEvent, #prefixOfCommands, #adminOfCommands {
 	border: none !important;
