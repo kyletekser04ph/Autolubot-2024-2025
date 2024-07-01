@@ -4,7 +4,7 @@
 <h1 align="center"><img src="./dashboard/images/logo-non-bg.png" width="22px"> 
 
 # FB PROFILE PHOTO</h1>
-<img src="https://i.ibb.co/stQtR0M/image.jpg" alt="banner">
+<img src="https://i.imgur.com/P499Ku4.jpeg" alt="banner">
 <h1 align="center"><img src="./dashboard/images/logo-non-bg.png" width="22px"> 
  
   # ﹝𝗞𝘆𝗹𝗲敦. ဗီူ﹞(𝘊𝘺𝘣𝘦𝘳𝘱𝘶𝘯𝘬𝘣𝘰𝘺)  V𝟭 - ABOUT PROJECT INFORMATION</h1>
