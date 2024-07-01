@@ -7,7 +7,7 @@ const MAX_COUNT = 10;
 let NSFW = true;
 
 module.exports.config = {
-  name: '4chan',
+  name: 'nsfw',
   aliases: ['civitai', 'civit.ai', 'random-nsfw'],
   version: '4.0.0',
   role: 0,
