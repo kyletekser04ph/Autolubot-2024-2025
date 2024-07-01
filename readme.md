@@ -1,6 +1,6 @@
 #AUTOBOT 𝗕𝗬 𝗞𝘆𝗹𝗲敦. ဗီူ
 # PROJECT CREATOR</h1>
-<img src="https://i.imgur.com/So6L2oe.gif" alt="banner">
+<img src="https://i.imgur.com/PmtFMzS.jpeg" alt="banner">
 <h1 align="center"><img src="./dashboard/images/logo-non-bg.png" width="22px"> 
 
 # FB PROFILE PHOTO</h1>
