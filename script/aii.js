@@ -1,30 +1,49 @@
+module.exports.config = {
+	name: "askv1",
+	version: "1.0.0",
+	hasPermission: 0,
+	hashPermission: 2,
+	credits: "joshua Apostol",
+	description: "Get response from snowflake API",
+	commandCategory: "fun",
+	cooldowns: 5,
+	hashPrefix: false,
+	dependencies: {
+		"axios": ""
+	}
+};
+
 const axios = require("axios");
 
-module.exports = {
-  config: {
-    name: "ai",
-    version: "1.0.0",
-    description: "AI command",
-    usage: "{pn} [message]",
-    author: "Rui",
-    cooldown: 5,
-    usePrefix: false,
-    role: 0,
-  },
-  async onRun({ fonts, api, message, args }) {
-    const query = args.join(" ");
+module.exports.run = async function({ api, event, args }) {
+	const input = args.join(" ");
+	if (!input) {
+		api.sendMessage("⚠️ Please provide a question.", event.threadID, event.messageID);
+		return;
+	}
+	
+	api.sendMessage("⏱️ | Fetching response. Please wait...", event.threadID, event.messageID);
+	
+	const response = await axios.get(`https://hashier-api-snowflake.vercel.app/api/snowflake?ask=${encodeURIComponent(input)}`).catch(error => {
+		api.sendMessage("Error fetching response.", event.threadID, event.messageID);
+		console.error(error);
+		return;
+	});
+	
+	if (response && response.status === 200 && response.data && response.data.answer) {
+		const answer = response.data.answer;
+		const question = input;
+		
+		const message = `
+			💭 Question:
+			${question}
 
-    if (!query) {
-      message.react("❓")
-      message.reply("❌ | Please provide a query!");
-    } else {
-      const info = await
-message.reply(`🔍 | ${query}`);
-      const response = await axios.get(`https://akhiro-rest-api.onrender.com/api/gpt4?q=${encodeURIComponent(query)}`);
-      api.editMessage(
-        `${fonts.bold("[🤖]—𝗔𝘂𝘁𝗼𝗟𝘂𝗯𝗼𝘁𝘃𝟯\n  （„• ֊ •„)♡")}\n▬▬▬▬▬▬▬▬▬▬▬▬\n${response.data.content}\n▬▬▬▬▬▬▬▬▬▬▬▬\n[📚]|𝗚𝗣𝗧-𝟰`,
-        info.messageID,
-      );
-    }
-  },
+			💡 Answer:
+			${answer}
+		`;
+		
+		api.sendMessage("```" + message + "```", event.threadID);
+	} else {
+		api.sendMessage("Failed to get a response.", event.threadID);
+	}
 };
