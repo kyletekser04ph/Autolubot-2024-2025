@@ -79,15 +79,15 @@ module.exports.run = async function ({
 			let page = 1;
 			let start = (page - 1) * pages;
 			let end = start + pages;
-			let helpMessage = `[📚] - 𝗘𝗗𝗨𝗖 𝗕𝗢𝗧 𝗖𝗠𝗗 𝗟𝗜𝗦𝗧:\n\n`;
+			let helpMessage = `[📚] - 𝗘𝗗𝗨𝗖 𝗕𝗢𝗧 𝗖𝗠𝗗 𝗟𝗜𝗦𝗧:\n◉▬▬▬▬▬▬ 👨🏻‍🏫 ▬▬▬▬▬▬◉`;
 			for (let i = start; i < Math.min(end, commands.length); i++) {
-				helpMessage += `\n👨🏻‍🏫『 ${i + 1} 』  ${prefix}${commands[i]}\n\t`;
+				helpMessage += `\n╰┈➤◈『 ${i + 1} 』  ${prefix}${commands[i]}`;
 			}
-			helpMessage += '\n\n『 𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧 』\n';
+			helpMessage += '\n◈▬▬▬▬▬▬ 👨🏻‍🏫 ▬▬▬▬▬▬◈\n『 𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧 』\n◈▬▬▬▬▬▬▬▬▬▬▬▬◈';
 			eventCommands.forEach((eventCommand, index) => {
-			helpMessage += `\n 👨🏻‍🏫\t『 ${index + 1}.』  ${prefix}${eventCommand}\n\n\n`;
+			helpMessage += `\n╰┈➤◈『 ${index + 1}.』  ${prefix}${eventCommand}\n\n\n`;
 			});
-			helpMessage += `『📖』𝗣𝗮𝗴𝗲: 『${page}/${Math.ceil(commands.length / pages)}』\nTo view information about a specific command, type '${prefix}help command name.\n\n𝗧𝗵𝗶𝘀 𝗘𝗗𝗨𝗖𝗔𝗧𝗜𝗢𝗡𝗔𝗟 𝗕𝗼𝘁 𝘄𝗮𝘀 𝗰𝗿𝗲𝗮𝘁𝗲𝗱 𝗯𝘆 • Kyle敦. ဗီူ\n\n📌 𝗥𝗔𝗡𝗗𝗢𝗠 𝗙𝗔𝗖𝗧: ${randomQuote}`;
+			helpMessage += `◈『📖』⏤͟͟͞͞𝗣𝗮𝗴𝗲: 『${page}/${Math.ceil(commands.length / pages)}』\nTo view information about a specific command, type '${prefix}help command name.\n\n𝗧𝗵𝗶𝘀 𝗘𝗗𝗨𝗖𝗔𝗧𝗜𝗢𝗡𝗔𝗟 𝗕𝗼𝘁 𝘄𝗮𝘀 𝗰𝗿𝗲𝗮𝘁𝗲𝗱 𝗯𝘆 • Kyle敦. ဗီူ:  https://www.facebook.com/kyledev03\n\n📌 𝗥𝗔𝗡𝗗𝗢𝗠 𝗙𝗔𝗖𝗧: ${randomQuote}`;
 			api.sendMessage(helpMessage, event.threadID, event.messageID);
 		} else if (!isNaN(input)) {
 			const page = parseInt(input);
