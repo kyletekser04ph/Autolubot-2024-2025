@@ -1,11 +1,11 @@
 const axios = require('axios');
 
 module.exports.config = {
-	name: "ai",
+	name: "blue",
 	version: "1.0.0",
 	role: 0,
 	credits: "Kyle敦. ဗီူ",
-	description: "cmd ai powered by [🤖]—𝗔𝘂𝘁𝗼𝗟𝘂𝗯𝗼𝘁𝘃𝟯",
+	description: "cmd ai powered by [🤖]—𝗘𝗱𝘂𝗰𝗕𝗼𝘁",
 	hasPrefix: false,
 	usage:"ai [your content]",
 	cooldown: 5,
@@ -18,7 +18,7 @@ module.exports.run = async function ({ api, event, args }) {
 		return api.sendMessage("Please Provide your question with [🤖]—𝗔𝘂𝘁𝗼𝗟𝘂𝗯𝗼𝘁𝘃𝟯", event.threadID, event.messageID);
 	}
 
-	api.sendMessage("[🤖]—𝗔𝘂𝘁𝗼𝗟𝘂𝗯𝗼𝘁𝘃𝟯 is typing please wait...", event.threadID, event.messageID); 
+	api.sendMessage("🔍 𝗘𝗱𝘂𝗰—𝗕𝗼𝘁 is typing please wait...", event.threadID, event.messageID); 
 
 	const apiUrl = `https://bluerepoapislasttry.onrender.com/hercai?content=${content}`;
 
