@@ -25,7 +25,7 @@ module.exports.run = async function({
       data
     } = await axios.get(`https://soyeon-api.onrender.com/api?prompt=${encodeURIComponent(input)}`);
     const response = data.response;
-    api.sendMessage(`🤖 𝗘𝗗𝗨𝗖-𝗕𝗢𝗧(𝗔.𝗜)\n ${response} \n`, event.threadID, event.messageID);
+    api.sendMessage(`🤖 𝗘𝗗𝗨𝗖-𝗕𝗢𝗧(𝗔.𝗜)\n▬▬▬▬▬▬▬▬▬▬▬▬\n ${response}`, event.threadID, event.messageID);
   } catch (error) {
     api.sendMessage('❌ | Error in searching your question:(', event.threadID, event.messageID);
   }
