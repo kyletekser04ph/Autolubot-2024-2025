@@ -8,7 +8,7 @@ module.exports.config = {
   credits: "kyle",
   description: "AI powered by education bot",
   aliases: ["Ai", "what", "ano", "why"],
-  cooldowns: 0,
+  cooldowns: 5,
 };
 
 module.exports.start = async function ({ api, event, text, react, reply }) {
