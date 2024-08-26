@@ -9,7 +9,7 @@ module.exports.config = {
     description: "Get a random Bible verse.",
     hasPrefix: false,
     aliases: ["bibleverse", "randombibbleverse"],
-    usage: "",
+    usage: "Bibleverse",
     cooldown: 5,
 };
 
