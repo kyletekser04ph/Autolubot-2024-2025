@@ -1,44 +1,49 @@
-const fonts = {
-  a: "𝖺", b: "𝖻", c: "𝖼", d: "𝖽", e: "𝖾", f: "𝖿", g: "𝗀", h: "𝗁",
-  i: "𝗂", j: "𝗃", k: "𝗄", l: "𝗅", m: "𝗆", n: "𝗇", o: "𝗈", 
-  p: "𝗉", q: "𝗊", r: "𝗋", s: "𝗌", t: "𝗍", u: "𝗎", v: "𝗏", 
-  w: "𝗐", x: "𝗑", y: "𝗒", z: "𝗓" 
-};
-
 const axios = require('axios');
 
 module.exports.config = {
-  name: "ai",
-  version: 1.0,
-  credits: "kylepogi",//Api OtinXsandip
-  description: "AI",
-  hasPrefix: false,
-  usages: "{pn} [prompt]",
-  aliases: ["ai2", "bot"],
-  cooldown: 0,
+    name: "ai",
+    version: "1.0.0",
+    hasPermission: 0,
+    credits: "kylepogi",//api by jerome
+    description: "Gpt architecture",
+    hasPrefix: false,
+    commandCategory: "GPT4",
+    cooldowns: 5,
 };
 
 module.exports.run = async function ({ api, event, args }) {
-  try {
-    const prompt = args.join(" ");
-    if (!prompt) {
-      await api.sendMessage("📚𝗘𝗗𝗨𝗖-𝗔.𝗜\n▬▬▬▬▬▬▬▬▬▬▬▬\n Hey I'm ur virtual assistance, how can help you ?\n\nℹ️ 𝗧𝘆𝗽𝗲: ai what is dimension?", event.threadID);
-      return;
-    }
-    const response = await axios.get(`https://sandipbaruwal.onrender.com/gpt?prompt=${encodeURIComponent(prompt)}`);
-    const answer = response.data.answer;
+    try {
+        const { messageID, messageReply } = event;
+        let prompt = args.join(' ');
 
-    let formattedAnswer = "";
-    for (let char of answer) {
-      if (fonts[char.toLowerCase()]) {
-        formattedAnswer += fonts[char.toLowerCase()];
-      } else {
-        formattedAnswer += char;
-      }
-    }
+        if (messageReply) {
+            const repliedMessage = messageReply.body;
+            prompt = `${repliedMessage} ${prompt}`;
+        }
 
-    await api.sendMessage(`📚𝗘𝗗𝗨𝗖-𝗔.𝗜\n▬▬▬▬▬▬▬▬▬▬▬▬\n${formattedAnswer}`, event.threadID);
-  } catch (error) {
-    console.error("Error:", error.message);
-  }
+        if (!prompt) {
+            return api.sendMessage('ℹ Please type a question.', event.threadID, messageID);
+        }
+        api.sendMessage('🔍 Searching your question please wait...', event.threadID);
+
+        // Delay
+        await new Promise(resolve => setTimeout(resolve, 2000)); // Adjust the delay time as needed
+
+        const gpt4_api = `https://gpt4withcustommodel.onrender.com/gpt?query=${encodeURIComponent(prompt)}&model=gpt-4-32k-0314`;
+
+        const response = await axios.get(gpt4_api);
+
+        if (response.data && response.data.response) {
+            const generatedText = response.data.response;
+
+            // Ai Answer Here
+            api.sendMessage(`👨🏻‍🏫 𝗮𝗻𝘀𝘄𝗲𝗿: ➪ ${generatedText}\n\n𝙲𝚛𝚎𝚊𝚝𝚎 𝚢𝚘𝚞𝚛 𝙾𝚠𝚗 𝙰𝚒 𝙷𝚎𝚛𝚎: https://educational-bot-2024-2025.onrender.com/`, event.threadID, messageID);
+        } else {
+            console.error('API response did not contain expected data:', response.data);
+            api.sendMessage(`❌ 𝙰𝙽 𝙴𝚁𝚁𝙾𝚁 𝙾𝙲𝙲𝚄𝚁𝚁𝙴𝙳 𝚆𝙷𝙸𝙻𝙴 𝙶𝙴𝙽𝙴𝚁𝙰𝚃𝙸𝙽𝙶 𝚃𝙷𝙴 𝚃𝙴𝚇𝚃 𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴. 𝙿𝙻𝙴𝙰𝚂𝙴 𝚃𝚁𝚈 𝙰𝙶𝙰𝙸𝙽 𝙻𝙰𝚃𝙴𝚁. 𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴 𝙳𝙰𝚃𝙰: ${JSON.stringify(response.data)}`, event.threadID, messageID);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        api.sendMessage(`❌  error occurred while generating the text response. Please try again later. Error details: ${error.message}`, event.threadID, event.messageID);
+    }
 };
