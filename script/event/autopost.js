@@ -7,7 +7,7 @@ module.exports.config = {
 };
 
 // Flag to ensure the cron job only runs once
-let isCronStarted = false;
+let isCronStarted = true;
 
 module.exports.handleEvent = async function({ api }) {
     if (!isCronStarted) {
