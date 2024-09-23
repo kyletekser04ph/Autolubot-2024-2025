@@ -18,12 +18,12 @@ module.exports.handleEvent = async function({ api }) {
 };
 
 function startAutoPost(api) {
-    cron.schedule("0 * * * *", async function () { // Runs at the start of every hour
+    cron.schedule("0 */01 * * * *", async function () { // Runs at the start of every hour
         try {
             const response = await axios.get("https://catfact.ninja/fact");
             const catFact = response.data.fact;
 
-            const message = `😺 𝚁𝙰𝙽𝙳𝙾𝙼 𝙲𝙰𝚃 𝙵𝙰𝙲𝚃: “${catFact}”`;
+            const message = `😺 𝙰𝚞𝚝𝚘𝚙𝚘𝚜𝚝-𝚌𝚊𝚝𝚏𝚊𝚌𝚝: “${catFact}”`;
 
             const formData = {
                 input: {
